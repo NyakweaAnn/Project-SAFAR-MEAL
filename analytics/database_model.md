@@ -48,3 +48,25 @@ DIVIDE(
     8500,
     0
 )
+Acceptable_FCS_Prevalence = 
+DIVIDE(
+    CALCULATE(
+        DISTINCTCOUNT(Fact_Nutrition_PDM[Household_ID]),
+        Fact_Nutrition_PDM[PDM_FCS_Score] > 35
+    ),
+    DISTINCTCOUNT(Fact_Nutrition_PDM[Household_ID]),
+    0
+)
+Operational_Risk_Flag = 
+VAR MeanrCSI = AVERAGE(Fact_Nutrition_PDM[PDM_rCSI_Score])
+VAR FailureRate = DIVIDE(
+    CALCULATE(COUNT(Fact_Cash_Transfers[Transaction_ID]), Fact_Cash_Transfers[Transfer_Status] = "Failed"),
+    COUNT(Fact_Cash_Transfers[Transaction_ID]),
+    0
+)
+RETURN
+IF(
+    MeanrCSI > 20 || FailureRate > 0.05,
+    "⚠️ CRITICAL ACTION REQUIRED: High Coping Spikes or Payment Failures Detected",
+    "✅ Operational Performance Stable"
+)
