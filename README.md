@@ -8,12 +8,13 @@ This repository serves as an end-to-end portfolio demonstration of a **BHA-Grade
 ---
 
 ## 📁 Portfolio Architecture & Navigation
-This project is systematically broken down into four distinct operational phases:
+This project is systematically broken down into four distinct operational directories:
 
-1. **[Strategic MEAL Design](#1-strategic-meal-design)**: BHA logframe alignment and complex indicator math frameworks.
-2. **[Field Data Engineering](#2-field-data-engineering)**: Production-ready XLSForms with automated regex and protection constraints.
-3. **[Automated ETL & Data Protection](#3-automated-etl--data-protection)**: Python data pipelines for processing indicators and masking sensitive identities.
-4. **[Accountability & Community Feedback](#4-accountability--community-feedback)**: Closed-loop Community Accountability and Response Mechanisms (CARM).
+1. **Strategic MEAL Design**: BHA logframe alignment and complex indicator math frameworks (Detailed below).
+2. **[Field Data Engineering](./data-engineering/)**: Production-ready XLSForms with mobile phone regex verification and data protection constraints.
+3. **[Cloud Survey Deployment Proofs](./Kobotoolbox/)**: Live Enketo web form deployments running inside KoboToolbox with functioning dynamic protection alerts and form validators.
+4. **[Relational Data Modeling & Analytics](./analytics/)**: Multi-table Star Schema database specifications and advanced production-grade Power BI DAX measures.
+5. **[Accountability & Adaptive Management](./accountability/)**: Closed-loop Community Accountability and Response Mechanisms (CARM) matrices and automated threat-detection pivot scenarios.
 
 ---
 
@@ -44,16 +45,7 @@ To ensure high-level technical precision, field metrics are calculated utilizing
 
 ---
 
-## ⚙️ 2. Field Data Engineering
-To eliminate human input errors at the point of data entry, the survey instruments are built using **XLSForm architecture** compatible with KoboToolbox, ODK, and SurveyCTO.
-
-### Core Survey Schema Definition
-The registry layout contains hardcoded entry validations, Safaricom M-PESA mobile wallet regex verification, and dynamic protection triggers.
-
-| type | name | label | hint / constraints | relevant |
-| :--- | :--- | :--- | :--- | :--- |
-| **select_one sub_counties** | sub_county | Select Sub-County | Options: Lodwar, Kakuma, Lokichoggio | |
-| **integer** | hh_size | Household Size | Constraint: `. > 0 and . < 25` | |
-| **integer** | head_age | Age of Household Head | Constraint: `. >= 12 and . <= 100` | |
-| **text** | mpesa_num | M-PESA Mobile Number | Constraint: `regex(., '^0(7\|1)\d{8}$')` | |
-| **note** | child_head_alert | **⚠️ PROTECTION ALERT** | Visual flag for child-headed households | `${head_age} < 18` |
+## 🛠️ Core System Tools Used
+* **Data Collection Platforms:** KoboToolbox / ODK / SurveyCTO (XLSForm Architecture)
+* **Data Engineering Pipelines:** Python (Pandas & NumPy for data cleansing and Statistical Disclosure Control masking)
+* **Business Intelligence Layer:** Power BI Desktop (Advanced DAX modeling and Star Schema architecture layout)
